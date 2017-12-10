@@ -1,23 +1,20 @@
 import pygame
+import world
 
 print("GAME IS ON")
 pygame.init()
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
 clock = pygame.time.Clock()
-screen = pygame.display.set_mode((900, 600))
+screen = pygame.display.set_mode((world.width, world.height))
 
 
 def display_screen():
     pygame.display.update()
     clock.tick(60)
-    screen.fill((0, 0, 0))    # BACKGROUND
-    pygame.draw.circle(screen, RED, (100, 200), 40, 20)
+    screen.fill(world.BLUE_SKY)    # BACKGROUND
+    pygame.draw.rect(screen, world.BROWN_GROUND, \
+                     pygame.Rect(0, world.groundLine, world.width, world.height-world.groundLine))
+    world.draw_bird(screen)
     return
 
 
@@ -36,7 +33,7 @@ while running:
     if counter > 100:
         running = False
     # calculate here
-
+    world.calculate()
     # render
     display_screen()
 
